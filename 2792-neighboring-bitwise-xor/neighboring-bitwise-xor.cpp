@@ -1,11 +1,13 @@
 class Solution {
 public:
     bool doesValidArrayExist(vector<int>& derived) {
-        int s=0;
+        int first=0;
+        int last=0;
         for(auto it:derived){
-            s^=it;
+            if(it){
+                last=~last;
+            }
         }
-        if(s!=0) return false;
-        return true;
+        return first==last;
     }
 };
