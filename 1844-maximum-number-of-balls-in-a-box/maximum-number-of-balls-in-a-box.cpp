@@ -9,7 +9,7 @@ public:
         return ans;
     }
     int countBalls(int lowLimit, int highLimit) {
-        map<int,int> mpp;
+        unordered_map<int,int> mpp;
         int maxi=0;
         for(int i=lowLimit;i<=highLimit;i++){
             int sum=i;
