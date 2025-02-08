@@ -4,7 +4,7 @@ public:
     map<int, set<int>> numToIndices;
 
     NumberContainers() {
-        
+
     }
 
     void change(int index, int number) {
@@ -18,7 +18,7 @@ public:
     }
 
     int find(int number) {
-        return numToIndices.count(number) && !numToIndices[number].empty() ? *numToIndices[number].begin() : -1;
+        return  !numToIndices[number].empty() ? *numToIndices[number].begin() : -1;
     }
 };
 
