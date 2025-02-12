@@ -10,7 +10,7 @@ public:
     }
 
     int maximumSum(vector<int>& nums) {
-        map<int, vector<int>> mpp;
+        unordered_map<int, vector<int>> mpp;
         for(int num : nums){
             mpp[fun(num)].push_back(num);
         }
