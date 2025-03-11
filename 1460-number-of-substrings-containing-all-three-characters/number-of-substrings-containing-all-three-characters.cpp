@@ -1,16 +1,15 @@
 class Solution {
 public:
     int numberOfSubstrings(string s) {
-        unordered_map<char,int> mpp;
+        vector<int> mpp(s.size(),0);
         int l=0;
         int r=0;
         int count=0;
         while(r<s.size()){
-            mpp[s[r]]++;
-            while(mpp.size()==3){
+            mpp[s[r]-'a']++;
+            while(mpp[0]>0 && mpp[1]>0 && mpp[2]>0){
                 count+=(s.size()-r);
-                mpp[s[l]]--;
-                if(mpp[s[l]]==0) mpp.erase(s[l]);
+                mpp[s[l]-'a']--;
                 l++;
             }
             r++;
