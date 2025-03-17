@@ -5,7 +5,7 @@ public:
         for(auto it:nums){
             mpp[it]++;
         }
-        if(mpp.size()>nums.size()/2) return false;
+        //if(mpp.size()>nums.size()/2) return false;
         for(auto it:mpp){
             if(it.second%2!=0) return false;
         }
