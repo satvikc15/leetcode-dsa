@@ -12,7 +12,7 @@ public:
             auto [diff, pos] = pq.top();
             pq.pop();
             int i = pos.first, j = pos.second;
-            if (i == n - 1 && j == m - 1) return diff;
+            //if (i == n - 1 && j == m - 1) return diff;
 
             for (auto [a, b] : dir) {
                 int ni = i + a, nj = j + b;
