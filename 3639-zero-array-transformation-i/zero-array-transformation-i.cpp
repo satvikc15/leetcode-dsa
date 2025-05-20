@@ -10,12 +10,10 @@ public:
         for(int i=0;i<nums.size();i++){
             t+=temp[i];
             nums[i]+=t;
-            if(nums[i]<0) nums[i]=0;
-            cout << nums[i] << " ";
+            if(nums[i]<=0) nums[i]=0;
+            else return false;
         }
-        for(auto it:nums){
-            if(it!=0) return false;
-        }
+        
         return true;
     }
 };
