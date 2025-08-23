@@ -19,14 +19,13 @@ public:
         }
         if (!(low < root->val && root->val < high)) return false;
         
-           if(!root->left && !root->right){
+           
             if(roots.find(root->val)!=roots.end()){
                 root->left=roots[root->val]->left;
                 root->right=roots[root->val]->right;
                 roots.erase(root->val);  
             }
-        }
-        return dfs(root->left, low, root->val) && dfs(root->right, root->val, high);
+                return dfs(root->left, low, root->val) && dfs(root->right, root->val, high);
     }
     TreeNode* canMerge(vector<TreeNode*>& trees) {
         for(auto it:trees){
