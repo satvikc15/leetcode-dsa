@@ -11,40 +11,44 @@
  */
 class Solution {
 public:
-    unordered_map<int,TreeNode*> roots;
-    unordered_set<int> child;
-    bool dfs(TreeNode* root,long low,long high){
-        if(root==NULL){
+    unordered_map<int,TreeNode*> root;
+    set<int> child;
+    bool fun(TreeNode* temp,long low,long high){
+        if(temp==nullptr){
             return true;
         }
-        if (!(low < root->val && root->val < high)) return false;
-        
-           
-            if(roots.find(root->val)!=roots.end()){
-                root->left=roots[root->val]->left;
-                root->right=roots[root->val]->right;
-                roots.erase(root->val);  
-            }
-                return dfs(root->left, low, root->val) && dfs(root->right, root->val, high);
+        if(temp->val<=low || temp->val>=high) return false;
+
+        if(root.find(temp->val)!=root.end()){
+            if(temp->left || temp->right) return false;
+            temp->left=root[temp->val]->left;
+            temp->right=root[temp->val]->right;
+            root.erase(temp->val);
+
+        }
+        return fun(temp->left,low,temp->val)&&fun(temp->right,temp->val,high);
     }
     TreeNode* canMerge(vector<TreeNode*>& trees) {
+        
         for(auto it:trees){
-            roots[it->val]=it;
+            root[it->val]=it;
             if(it->left) child.insert(it->left->val);
             if(it->right) child.insert(it->right->val);
         }
-        TreeNode* root=NULL;
+        TreeNode* temp=NULL;
         for(auto it:trees){
-            if(child.find(it->val)==child.end()){   
-                if(root) return nullptr;  
-                root=it;
+            if(child.find(it->val)==child.end()){
+                if(temp){
+                    return nullptr;
+                }
+                temp=it;
             }
         }
-        if(!root) return nullptr;
-        roots.erase(root->val);
-         if (!dfs(root, LONG_MIN, LONG_MAX)) return nullptr;
-         if (!roots.empty()) return nullptr;
+        if(!temp) return NULL;
+        root.erase(temp->val);
+        if(!fun(temp,LONG_MIN,LONG_MAX)) return nullptr;
+        if(!root.empty()) return NULL;
+        return temp;
 
-        return root;
     }
 };
