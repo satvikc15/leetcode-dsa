@@ -1,22 +1,27 @@
 class Solution {
 public:
+    double pow(double x,long long n){
+        if(n==0){
+            return 1.0;
+        }
+        if(n==1){
+            return x;
+        }
+        if(n%2==0){
+            double temp = pow(x,n/2);
+            return temp*temp;
+        }else{
+            return x*pow(x,n-1);
+        }
+    }
     double myPow(double x, int n) {
         long long nn=n;
         if(nn<0){
             nn=-nn;
         }
-        double ans=1.0;
-        while(nn){
-            if(nn%2){
-                ans=ans*x;
-                nn=nn-1;
-            }else{
-                x=x*x;
-                nn=nn/2;
-            }
-        }
+        double ans = pow(x,nn);
         if(n<0){
-            ans = 1.0/(double)ans;
+            return (double)1/ans;
         }
         return ans;
     }
