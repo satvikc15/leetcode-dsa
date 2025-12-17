@@ -1,12 +1,13 @@
 class Solution {
 public:
-    void fun(int i, vector<int>& candidates, int target, vector<int>& temp, set<vector<int>>& ans) {
-        if (target == 0) {                 
-            ans.insert(temp);
+    void fun(int i, vector<int>& candidates, int target, vector<int>& temp, vector<vector<int>>& ans) {
+        if(i==candidates.size()){
+            if(target==0){
+                ans.push_back(temp);
+            }
             return;
         }
-        if (i == candidates.size() || target < 0) return;
-
+        if(target<0) return;
         temp.push_back(candidates[i]);
         fun(i+1, candidates, target - candidates[i], temp, ans);
         temp.pop_back();
@@ -19,9 +20,9 @@ public:
 
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
         sort(candidates.begin(), candidates.end());  
-        set<vector<int>> ans;
+        vector<vector<int>> ans;
         vector<int> temp;
         fun(0, candidates, target, temp, ans);
-        return vector<vector<int>>(ans.begin(), ans.end());
+        return ans;
     }
 };
